@@ -49,9 +49,12 @@ class _VoiceAssistantPageState extends State<VoiceAssistantPage> {
   Future<void> _initSpeech() async {
     final available = await _speech.initialize(
       onError: (SpeechRecognitionError error) {
-        if (_state == VoiceState.listening) {
-          _fail('Erro no reconhecimento de voz: ${error.errorMsg}');
-        }
+        // No state guard here on purpose: the plugin doesn't guarantee
+        // onError fires before onStatus('done'). If onStatus wins the race
+        // it drives the state to idle first (via _onListeningDone seeing an
+        // empty transcript) — this unconditional call still overrides that
+        // back to an explicit error, whichever callback lands second.
+        _fail('Erro no reconhecimento de voz: ${error.errorMsg}');
       },
       onStatus: (status) {
         if ((status == 'done' || status == 'notListening') &&
