@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:minimalauncher/pages/right_screen.dart';
 import 'package:minimalauncher/pages/widgets/app_drawer.dart';
 import 'package:minimalauncher/variables/strings.dart';
+import 'package:minimalauncher/voice/voice_assistant_page.dart';
 // import 'package:notification_listener/notification_listener.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -235,6 +236,8 @@ class HomeScreenState extends State<HomeScreen> {
         Expanded(child: Container()),
         homeScreenApps(),
         Expanded(child: Container()),
+        micButton(),
+        SizedBox(height: 16.0),
         searchWidget(),
         SizedBox(height: screenHeight * 0.05),
       ],
@@ -451,6 +454,26 @@ class HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
+      ),
+    );
+  }
+
+  Widget micButton() {
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.mediumImpact();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const VoiceAssistantPage()),
+        );
+      },
+      child: Opacity(
+        opacity: 0.6,
+        child: Icon(
+          Icons.mic_none_rounded,
+          color: textColor,
+          size: 28,
+        ),
       ),
     );
   }

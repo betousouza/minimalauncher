@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:minimalauncher/pages/jarvis_settings_page.dart';
 import 'package:minimalauncher/variables/strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -178,6 +179,24 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
+              ),
+              Divider(),
+              ListTile(
+                title: Text(
+                  'Jarvis (voz)',
+                  style: TextStyle(
+                    color: textColor,
+                    fontFamily: fontNormal,
+                  ),
+                ),
+                trailing: Icon(Icons.chevron_right, color: textColor),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const JarvisSettingsPage()),
+                  );
+                },
               ),
               Divider(),
             ],

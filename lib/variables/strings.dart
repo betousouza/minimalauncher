@@ -15,6 +15,13 @@ const String prefsWeatherDesc = 'weather';
 
 const String homeStatsSeperator = '   /   ';
 
+const String prefsJarvisServerUrl = 'jarvisServerUrl';
+const String prefsJarvisApiKey = 'jarvisApiKey';
+const String prefsJarvisCfAccessClientId = 'jarvisCfAccessClientId';
+const String prefsJarvisCfAccessClientSecret = 'jarvisCfAccessClientSecret';
+
+const String jarvisModel = 'gemini-3.6-flash';
+
 const String launcherPackageName = 'com.example.minimalauncher';
 
 const String googlePackageName = 'com.google.android.googlequicksearchbox';
