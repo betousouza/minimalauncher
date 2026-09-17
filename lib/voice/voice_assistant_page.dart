@@ -182,6 +182,15 @@ class _VoiceAssistantPageState extends State<VoiceAssistantPage> {
         enqueueSpeech(splitter.flush());
         await speechChain;
         if (turn != _turn) return;
+        if (_responseText.trim().isEmpty) {
+          // The server answered (200 OK) but produced no text delta at all —
+          // observed when the model responds with a tool/function call that
+          // the chat endpoint doesn't resolve into text. Silently going back
+          // to idle here would look identical to nothing having happened.
+          _fail(
+              'O Jarvis não respondeu com texto a esse pedido (pode ter tentado usar uma ferramenta). Tente perguntar de outro jeito.');
+          return;
+        }
         _messages.add({'role': 'assistant', 'content': _responseText});
         setState(() => _state = VoiceState.idle);
       },
